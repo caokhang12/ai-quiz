@@ -1,5 +1,5 @@
 import MCQ from "@/components/MCQ";
-import { getAuthSession } from "@/lib/nexthauth";
+import { getAuthSession } from "@/lib/nextauth";
 import { prisma } from "@/lib/prisma";
 import { redirect } from "next/navigation";
 
@@ -9,7 +9,7 @@ type Props = {
   };
 };
 
-const page = async ({ params }: Props) => {
+const MCPage = async ({ params }: Props) => {
   const { gameId } = await params;
   const session = await getAuthSession();
   if (!session?.user) {
@@ -33,4 +33,4 @@ const page = async ({ params }: Props) => {
   return <MCQ game={gameData} />;
 };
 
-export default page;
+export default MCPage;

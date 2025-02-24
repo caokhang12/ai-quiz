@@ -1,7 +1,7 @@
 import SignInButton from "@/components/SignInButton";
 import { ThemeToggle } from "@/components/ThemeToogle";
 import UserAcountNav from "@/components/UserAcountNav";
-import { getAuthSession } from "@/lib/nexthauth";
+import { getAuthSession } from "@/lib/nextauth";
 import Link from "next/link";
 
 const Navbar = async () => {

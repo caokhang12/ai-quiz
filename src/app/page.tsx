@@ -6,7 +6,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { getAuthSession } from "@/lib/nexthauth";
+import { getAuthSession } from "@/lib/nextauth";
 import { redirect } from "next/navigation";
 
 export default async function Home() {

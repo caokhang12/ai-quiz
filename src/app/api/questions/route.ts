@@ -6,30 +6,38 @@ export const POST = async (req: Request) => {
   try {
     const body = await req.json();
     const { amount, type, topic } = quizCreationSchema.parse(body);
-    let questions: { question: string; answer: string; option1?: string; option2?: string; option3?: string }[] = [];
+    let questions: {
+      question: string;
+      answer: string;
+      option1?: string;
+      option2?: string;
+      option3?: string;
+    }[] = [];
     if (type === "OPEN_ENDED") {
       questions = await strict_output(
-        "You are a helpful AI that is able to generate a pair of question and answers, the length of each answer should not be more than 15 words, store all the pairs of answers and questions in a JSON array",
+        "You are a helpful AI that is able to generate a pair of question and answer, store all the pairs of answers and questions in a JSON array",
         new Array(amount).fill(
-          `You are to generate a random hard open-ended questions about ${topic}`
+          `You are going to generate one random easy open-ended question about ${topic}`
         ),
         {
-          question: "question",
-          answer: "answer with max length of 15 words",
+          question: "question should be clear and fact-based",
+          answer:
+            "The answer should be a single short phrase or name, not a full sentence with max length of 3 words.",
         }
       );
     } else if (type === "MULTI_CHOICE") {
+      //// taọ nhiều câu hỏi hơn amount
       questions = await strict_output(
         "You are a helpful AI that is able to generate mcq questions and answers, the length of each answer should not be more than 15 words, store all answers and questions and options in a JSON array",
         new Array(amount).fill(
-          `You are to generate a random hard mcq question about ${topic}`
+          `You are going to generate one random easy mcq question about ${topic}`
         ),
         {
           question: "question",
-          answer: "answer with max length of 15 words",
-          option1: "option1 with max length of 15 words",
-          option2: "option2 with max length of 15 words",
-          option3: "option3 with max length of 15 words",
+          answer: "answer with max length of 10 words(correct answer)",
+          option1: "option1 with max length of 10 words (incorrect answer)",
+          option2: "option2 with max length of 10 words(incorrect answer)",
+          option3: "option3 with max length of 10 words(incorrect answer)",
         }
       );
     }

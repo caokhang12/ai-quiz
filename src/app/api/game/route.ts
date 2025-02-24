@@ -1,4 +1,4 @@
-import { getAuthSession } from "@/lib/nexthauth";
+import { getAuthSession } from "@/lib/nextauth";
 import { prisma } from "@/lib/prisma";
 import { quizCreationSchema } from "@/schemas/form/quiz";
 import { redirect } from "next/navigation";
@@ -45,6 +45,7 @@ export const POST = async (req: Request) => {
         ].sort(() => Math.random() - 0.5);
         return {
           gameId: newGame.id,
+          answer: question.answer,
           question: question.question,
           options: JSON.stringify(options),
           questionType: "MULTI_CHOICE",
@@ -71,6 +72,7 @@ export const POST = async (req: Request) => {
         data: oe_data,
       });
     }
+
     return NextResponse.json({ gameId: newGame.id }, { status: 200 });
   } catch (error) {
     if (error instanceof z.ZodError) {

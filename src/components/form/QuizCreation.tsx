@@ -1,5 +1,6 @@
 "use client";
 
+import LoadingQuestions from "@/components/LoadingQuestions";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -24,6 +25,7 @@ import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import { BookOpen, CopyCheck } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
@@ -31,9 +33,10 @@ type Input = z.infer<typeof quizCreationSchema>;
 
 const QuizCreation = () => {
   const router = useRouter();
-
+  const [showLoader, setShowLoader] = useState(false);
   const { mutate: getQuestion, isPending } = useMutation({
     mutationFn: async (data: Input) => {
+      setShowLoader(true);
       const response = await axios.post("/api/game", data);
       return response.data;
     },
@@ -64,9 +67,16 @@ const QuizCreation = () => {
             router.push(`/play/oe/${gameId}`);
           }
         },
+        onError: () => {
+          setShowLoader(false);
+        },
       }
     );
   };
+
+  if (showLoader) {
+    return <LoadingQuestions />;
+  }
 
   return (
     <div className="absolute shadow-lg top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
