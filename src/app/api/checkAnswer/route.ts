@@ -1,5 +1,5 @@
 import { prisma } from "@/lib/prisma";
-import { checkAnswerSchema } from "@/schemas/form/quiz";
+import { checkAnswerSchema } from "@/schemas/questions";
 import { NextResponse } from "next/server";
 import stringSimilarity from "string-similarity";
 

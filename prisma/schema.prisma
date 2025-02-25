@@ -56,7 +56,7 @@ model Game {
   questions   Question[]
   timeStarted DateTime
   topic       String
-  timeEnded   DateTime?
+  timeEnded   Int?
   gameType    GameType
   user        User       @relation(fields: [userId], references: [id], onDelete: Cascade)
 

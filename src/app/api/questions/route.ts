@@ -1,11 +1,11 @@
 import { strict_output } from "@/lib/gpt";
-import { quizCreationSchema } from "@/schemas/form/quiz";
+import { getQuestionsSchema } from "@/schemas/questions";
 import { NextResponse } from "next/server";
 
 export const POST = async (req: Request) => {
   try {
     const body = await req.json();
-    const { amount, type, topic } = quizCreationSchema.parse(body);
+    const { amount, type, topic } = getQuestionsSchema.parse(body);
     let questions: {
       question: string;
       answer: string;

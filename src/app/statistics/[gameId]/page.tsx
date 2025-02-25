@@ -9,8 +9,7 @@ import React from "react";
 import ResultsCard from "@/components/statistics/ResultsCard";
 import AccuracyCard from "@/components/statistics/AccuracyCard";
 import QuestionsList from "@/components/statistics/QuestionsList";
-// import TimeTakenCard from "@/components/statistics/TimeTakenCard";
-// import QuestionsList from "@/components/statistics/QuestionsList";
+import TimeTakenCard from "@/components/statistics/TimeTakenCard";
 
 type Props = {
   params: {
@@ -66,10 +65,7 @@ const Statistics = async ({ params }: Props) => {
         <div className="grid gap-4 mt-4 md:grid-cols-7">
           <ResultsCard accuracy={accuracy} />
           <AccuracyCard accuracy={accuracy} />
-          {/* <TimeTakenCard
-            timeEnded={new Date(game.timeEnded ?? 0)}
-            timeStarted={new Date(game.timeStarted ?? 0)}
-          /> */}
+          <TimeTakenCard timeEnded={game.timeEnded} />
         </div>
         <QuestionsList questions={game.questions} />
       </div>

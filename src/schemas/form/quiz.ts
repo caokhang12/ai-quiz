@@ -9,7 +9,4 @@ export const quizCreationSchema = z.object({
   amount: z.number().int().min(1).max(20),
 });
 
-export const checkAnswerSchema = z.object({
-  questionId: z.string(),
-  userInput: z.string().min(1).max(255),
-});
+
